@@ -2,7 +2,7 @@ FROM php:7.3.8-fpm
 
 # Init php
 RUN apt update
-RUN apt install -y --no-install-recommends libzip-dev nginx
+RUN apt install -y --no-install-recommends libzip-dev nginx default-mysql-client
 RUN docker-php-ext-install zip mysqli mbstring opcache
 
 # For dotenv-php
