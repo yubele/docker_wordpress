@@ -17,7 +17,6 @@
  *
  * @package WordPress
  */
- 
 /**
  * require composer
  */

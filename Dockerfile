@@ -24,6 +24,7 @@ ADD .env /.env
 ADD nginx/default /etc/nginx/sites-available/default
 ADD docker_cmd.sh /docker_cmd.sh
 RUN chmod +x /docker_cmd.sh
+RUN /bin/chown www-data.www-data -R /var/www/wordpress
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
