@@ -28,7 +28,7 @@ if(file_exists('/usr/local/src/vendor/autoload.php')) {
 }
 
 # If this site accessed ssl.
-if (strpos(getenv('WP_URL'), 'https://') !== false) {
+if (getenv('WP_PROTOCOL') === 'https') {
 	$_SERVER['HTTPS'] = 'on';
 }
 
