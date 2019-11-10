@@ -32,8 +32,9 @@ if (strpos(getenv('WP_URL'), 'https://') !== false) {
 	$_SERVER['HTTPS'] = 'on';
 }
 
-define( 'WP_HOME', getenv('WP_URL')  );
-define( 'WP_SITEURL', getenv('WP_URL') . '/' . getenv('WP_SUFFIX') );
+$wp_home = getenv('WP_PROTOCOL') . '://' . getenv('HTTP_HOST');
+define( 'WP_HOME', $wp_home );
+define( 'WP_SITEURL', $wp_home . '/' . getenv('WP_SUFFIX') );
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
@@ -94,7 +95,7 @@ $table_prefix = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', getenv('WP_DEBUG'));
 
 /* That's all, stop editing! Happy publishing. */
 
