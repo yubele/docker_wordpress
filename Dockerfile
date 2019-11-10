@@ -26,6 +26,9 @@ ADD docker_cmd.sh /docker_cmd.sh
 RUN chmod +x /docker_cmd.sh
 RUN /bin/chown www-data.www-data -R /var/www/wordpress
 
+# Rename dirname for security
+RUN . /.env && if [ ! -d /var/www/$WP_SUFFIX ]; then mv /var/www/wordpress /var/www/$WP_SUFFIX; fi 
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
