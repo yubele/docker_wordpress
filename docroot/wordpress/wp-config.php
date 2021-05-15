@@ -1,4 +1,5 @@
 <?php
+ini_set("error_reporting",E_ALL);
 /**
  * The base configuration for WordPress
  *

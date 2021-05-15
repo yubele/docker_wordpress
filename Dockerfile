@@ -2,8 +2,10 @@ FROM php:7.4.19-fpm
 
 # Init php
 RUN apt update
-RUN apt install -y --no-install-recommends libzip-dev nginx default-mysql-client libfreetype6 libwebp-dev libjpeg-dev libpng-dev libxpm-dev libonig-dev
-RUN docker-php-ext-install zip mysqli mbstring opcache gd
+RUN apt install -y --no-install-recommends libzip-dev nginx default-mysql-client libfreetype6 libwebp-dev libjpeg-dev libpng-dev libxpm-dev libonig-dev libmagickwand-dev
+RUN printf "\n" |pecl install imagick  
+RUN docker-php-ext-install zip mysqli mbstring opcache gd exif 
+RUN docker-php-ext-enable imagick
 
 WORKDIR /usr/local/src
 
@@ -14,9 +16,10 @@ RUN php -r "unlink('composer-setup.php');"
 RUN php composer.phar require vlucas/phpdotenv
 
 # Init wordpress
-RUN curl https://wordpress.org/latest.tar.gz  |tar zx
+RUN curl https://ja.wordpress.org/latest-ja.tar.gz |tar zx
 ADD docroot/wordpress/wp-config.php /usr/local/src/wordpress/wp-config.php
 ADD docroot/index.php /var/www/index.php
+ADD php-fpm.d/log.conf /usr/local/etc/php-fpm.d/log.conf
 ADD .env /.env
 
 # Init nginx
