@@ -1,9 +1,9 @@
-FROM php:7.3.8-fpm
+FROM php:7.4.19-fpm
 
 # Init php
 RUN apt update
-RUN apt install -y --no-install-recommends libzip-dev nginx default-mysql-client
-RUN docker-php-ext-install zip mysqli mbstring opcache
+RUN apt install -y --no-install-recommends libzip-dev nginx default-mysql-client libfreetype6 libwebp-dev libjpeg-dev libpng-dev libxpm-dev libonig-dev
+RUN docker-php-ext-install zip mysqli mbstring opcache gd
 
 WORKDIR /usr/local/src
 
